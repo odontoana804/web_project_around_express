@@ -13,12 +13,13 @@ usersRouter.get("/users", async (req, res) => {
 usersRouter.get("/users/:id", async (req, res) => {
   const users = await getUsers();
   const { id } = req.params;
+  const selectedUser = users.filter((user) => user._id === id);
 
-  if (!users[id]) {
+  if (selectedUser.length === 0) {
     res.send({ message: "ID de usuario no encontrado" });
     return;
   }
-  res.send(users[id]);
+  res.send(selectedUser);
 });
 
 module.exports = usersRouter;

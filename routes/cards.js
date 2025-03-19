@@ -10,4 +10,16 @@ cardsRouter.get("/cards", async (req, res) => {
   }
 });
 
+cardsRouter.get("/cards/:id", async (req, res) => {
+  const cards = await getCards();
+  const { id } = req.params;
+  const selectedCard = cards.filter(card => card._id === id)
+
+  if (selectedCard.length === 0) {
+    res.send({ message: "ID de tarjeta no encontrado" });
+    return;
+  }
+  res.send(selectedCard);
+});
+
 module.exports = cardsRouter;

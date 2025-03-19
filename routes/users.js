@@ -16,7 +16,7 @@ usersRouter.get("/users/:id", async (req, res) => {
   const selectedUser = users.filter((user) => user._id === id);
 
   if (selectedUser.length === 0) {
-    res.send({ message: "ID de usuario no encontrado" });
+    res.status(404).send({ message: "ID de usuario no encontrado" });
     return;
   }
   res.send(selectedUser);

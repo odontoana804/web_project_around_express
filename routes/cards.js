@@ -13,9 +13,9 @@ cardsRouter.get("/cards", async (req, res) => {
 cardsRouter.get("/cards/:id", async (req, res) => {
   const cards = await getCards();
   const { id } = req.params;
-  const selectedCard = cards.filter(card => card._id === id)
+  const selectedCard = cards.find(card => card._id === id)
 
-  if (selectedCard.length === 0) {
+  if (!selectedCard) {
     res.status(404).send({ message: "ID de tarjeta no encontrado" });
     return;
   }

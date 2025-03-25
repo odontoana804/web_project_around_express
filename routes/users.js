@@ -1,16 +1,9 @@
 const usersRouter = require("express").Router();
-const { getUsers } = require("../data/db");
+const { getUsers } = require("../controllers/users");
 
-usersRouter.get("/users", async (req, res) => {
-  try {
-    const users = await getUsers();
-    res.send(users);
-  } catch (error) {
-    res.status(500).send({ message: "Error al leer datos de usuarios" });
-  }
-});
+usersRouter.get("/users", getUsers);
 
-usersRouter.get("/users/:id", async (req, res) => {
+/* usersRouter.get("/users/:id", async (req, res) => {
   const users = await getUsers();
   const { id } = req.params;
   const selectedUser = users.find((user) => user._id === id);
@@ -20,6 +13,6 @@ usersRouter.get("/users/:id", async (req, res) => {
     return;
   }
   res.send(selectedUser);
-});
+}); */
 
 module.exports = usersRouter;

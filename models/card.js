@@ -26,7 +26,7 @@ const cardSchema = new mongoose.Schema({
     required: true
   },
   likes: [{
-    type: mongoose.Schema.Types.ObjectId,      //falta poner que puede ser arreglo vacio
+    type: mongoose.Schema.Types.ObjectId,
     ref: user,
     required: true
   }],

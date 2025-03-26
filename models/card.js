@@ -15,7 +15,7 @@ const cardSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-          return v.find(/^(https?:\/\/)(www\.)?([a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)(\/[a-zA-Z0-9._~:/?%#\[\]@!$&'()*+,;=]*)?(#.*)?$/gi); //revisar
+          return v.match(/^(https?:\/\/)(www\.)?([a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)(\/[a-zA-Z0-9-._~:/?%#\[\]@!$&'()*+,;=]*)?(#.*)?$/gi);
         },
         message: 'Introducir URL valida',
       }

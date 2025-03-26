@@ -9,9 +9,20 @@ const app = express();
 
 mongoose.connect('mongodb://localhost:27017/aroundb');
 
+app.use((req, res, next) => {
+  req.user = {
+    _id: '67e407d2ad8e3d4adac9bef5' // pega el _id del usuario de prueba que creamos en el paso anterior
+  };
+  next();
+});
+
+app.use(express.json());
+
 app.use("/", usersRouter);
 app.use("/", cardsRouter);
 
 app.listen(PORT, () => {
   console.log("Enlace al servidor en el puerto:" + PORT);
 });
+
+

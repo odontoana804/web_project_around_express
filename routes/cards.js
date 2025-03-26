@@ -1,18 +1,8 @@
 const cardsRouter = require("express").Router();
-const { getCards } = require("../controllers/cards");
+const { getCards, removeCard } = require("../controllers/cards");
 
 cardsRouter.get("/cards", getCards );
 
-/* cardsRouter.get("/cards/:id", async (req, res) => {
-  const cards = await getCards();
-  const { id } = req.params;
-  const selectedCard = cards.find(card => card._id === id)
+cardsRouter.delete("/cards/:id", removeCard);
 
-  if (!selectedCard) {
-    res.status(404).send({ message: "ID de tarjeta no encontrado" });
-    return;
-  }
-  res.send(selectedCard);
-});
- */
 module.exports = cardsRouter;

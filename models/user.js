@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        return v.find(/(https?\:\/\/)?(w{3}\.)?\w+\.\w+\/?[\w\W\d]*?/gi);
+        return v.find(/(https?\:\/\/)?(w{3}\.)?\w+\.\w+\/?[\w\W\d]*?/gi);  //revisar
         },
         message: 'Introducir URL valida',
       }

@@ -15,7 +15,7 @@ const cardSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-          return v.find(/(https?\:\/\/)?(w{3}\.)?\w+\.\w+\/?[\w\W\d]*?/gi); //buscar con regEx
+          return v.find(/(https?\:\/\/)?(w{3}\.)?\w+\.\w+\/?[\w\W\d]*?/gi); //revisar
         },
         message: 'Introducir URL valida',
       }
@@ -26,7 +26,7 @@ const cardSchema = new mongoose.Schema({
     required: true
   },
   likes: [{
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,      //falta poner que puede ser arreglo vacio
     ref: user,
     required: true
   }],

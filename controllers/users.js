@@ -32,3 +32,13 @@ module.exports.setUserInfo = (req, res) => {
       .catch(err => res.status(404).send({ message: err.message }));
 }
 
+module.exports.setUserAvatar = (req, res) => {
+  const { avatar } = req.body;
+  User.findByIdAndUpdate( req.user._id, { avatar }, {
+      new: true,
+      runValidators: true,
+      upsert: true
+    })
+      .then(user => res.status(200).send({ data: user }))
+      .catch(err => res.status(404).send({ message: err.message }));
+}

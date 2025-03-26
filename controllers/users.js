@@ -20,3 +20,15 @@ module.exports.createUser = (req, res) => {
       .then(user => res.status(201).send({ data: user }))
       .catch(err => res.status(404).send({ message: err.message }));
 }
+
+module.exports.setUserInfo = (req, res) => {
+  const { name, about } = req.body;
+  User.findByIdAndUpdate( req.user._id, { name, about }, {
+      new: true,
+      runValidators: true,
+      upsert: true
+    })
+      .then(user => res.status(200).send({ data: user }))
+      .catch(err => res.status(404).send({ message: err.message }));
+}
+

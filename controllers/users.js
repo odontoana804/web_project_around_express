@@ -28,8 +28,9 @@ module.exports.setUserInfo = (req, res) => {
       runValidators: true,
       upsert: true
     })
+      .orFail()
       .then(user => res.status(200).send({ data: user }))
-      .catch(err => res.status(404).send({ message: err.message }));
+      .catch(err => res.status(400).send({ message: err.message }));
 }
 
 module.exports.setUserAvatar = (req, res) => {
@@ -39,6 +40,7 @@ module.exports.setUserAvatar = (req, res) => {
       runValidators: true,
       upsert: true
     })
+      .orFail()
       .then(user => res.status(200).send({ data: user }))
-      .catch(err => res.status(404).send({ message: err.message }));
+      .catch(err => res.status(400).send({ message: err.message }));
 }

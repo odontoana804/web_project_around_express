@@ -24,4 +24,30 @@ Creación de servidor con Express.js
   La página web esta desplegada en Github Pages y se aloja en el siguiente link: **https://odontoana804.github.io/web_project_around_express/**
 ***
 
+
+## Rutas:
+
+* **GET /users**: Obtiene todos los usuarios.
+
+* **GET /users/:id**: Obtiene un usuario específico por el Id.
+
+* **POST /users**: Crea un usuario.
+
+* **PATCH /users/me**: Actualiza información del usuario.
+
+* **PATCH /users/me/avatar**: Actualiza el avatar del usuario.
+
+* **GET /cards**: Obtiene todas las tarjetas.
+
+* **POST /cards**: Crea una tarjeta.
+
+* **DELETE /cards/:cardId**: Elimina una tarjeta específica.
+
+* **PUT /cards/:cardId/likes**: Agrega un like a una tarjeta.
+
+* **DELETE /cards/:cardId/likes**: Elimina un like de una tarjeta.
+
+
+
+
 ## Página Web diseñada por Ana María Vargas.

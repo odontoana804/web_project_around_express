@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const user = require('../models/user');
-
+const user = require("../models/user");
 
 const cardSchema = new mongoose.Schema({
   name: {
@@ -15,25 +14,29 @@ const cardSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-          return v.match(/^(https?:\/\/)(www\.)?([a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)(\/[a-zA-Z0-9-._~:/?%#\[\]@!$&'()*+,;=]*)?(#.*)?$/gi);
-        },
-        message: 'Introducir URL valida',
-      }
+        return v.match(
+          /^(https?:\/\/)(www\.)?([a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)(\/[a-zA-Z0-9-._~:/?%#\[\]@!$&'()*+,;=]*)?(#.*)?$/gi
+        );
+      },
+      message: "Introducir URL valida",
+    },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: user,
-    required: true
+    required: true,
   },
-  likes: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: user,
-    required: true
-  }],
+  likes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: user,
+      required: true,
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,
-  }
+  },
 });
 
-module.exports = mongoose.model('Card', cardSchema)
+module.exports = mongoose.model("Card", cardSchema);

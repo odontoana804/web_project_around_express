@@ -33,7 +33,7 @@ module.exports.likeCard = (req, res) => {
     { new: true }
   )
     .orFail()
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch((err) => res.status(400).send({ message: err.message }));
 };
 
@@ -44,6 +44,6 @@ module.exports.dislikeCard = (req, res) => {
     { new: true }
   )
     .orFail()
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch((err) => res.status(400).send({ message: err.message }));
 };

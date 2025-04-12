@@ -4,7 +4,7 @@ module.exports.getCards = (req, res) => {
   Card.find({})
     .populate("owner")
     .populate("likes")
-    .then((cards) => res.send({ data: cards }))
+    .then((cards) => res.send(cards))
     .catch((err) =>
       res.status(500).send({ message: "Error al leer datos de tarjetas" })
     );
@@ -13,7 +13,7 @@ module.exports.getCards = (req, res) => {
 module.exports.createCard = (req, res) => {
   const { name, link } = req.body;
   Card.create({ name, link, owner: req.user._id })
-    .then((user) => res.status(201).send({ data: user }))
+    .then((card) => res.status(201).send(card))
     .catch((err) => res.status(400).send({ message: err.message }));
 };
 
@@ -26,6 +26,8 @@ module.exports.removeCard = (req, res) => {
     );
 };
 
+/*
+//Esta función a mi me funciona, pero la programe diferente
 module.exports.likeCard = (req, res) => {
   Card.findByIdAndUpdate(
     req.params.cardId,
@@ -35,8 +37,26 @@ module.exports.likeCard = (req, res) => {
     .orFail()
     .then((card) => res.send(card))
     .catch((err) => res.status(400).send({ message: err.message }));
+}; */
+
+module.exports.likeCard =  (req, res) => {
+
+  Card.findById(req.params.cardId)
+    .orFail()
+    .then((card) => {
+      if (!card.likes.includes(req.user._id)) {
+        card.likes = [...card.likes, req.user._id]
+        card.save()
+        res.status(200).send(card)
+      } else {
+        res.status(200).send(card)
+      }
+    })
+    .catch((err) => res.status(400).send({ message: err.message }));
 };
 
+/*
+//Esta función a mi me funciona, pero la programe diferente
 module.exports.dislikeCard = (req, res) => {
   Card.findByIdAndUpdate(
     req.params.cardId,
@@ -45,5 +65,21 @@ module.exports.dislikeCard = (req, res) => {
   )
     .orFail()
     .then((card) => res.send(card))
+    .catch((err) => res.status(400).send({ message: err.message }));
+}; */
+
+module.exports.dislikeCard =  (req, res) => {
+
+  Card.findById(req.params.cardId)
+    .orFail()
+    .then((card) => {
+      if (card.likes.includes(req.user._id)) {
+        card.likes = card.likes.filter(id => id.toString() !== req.user._id.toString())
+        card.save()
+        res.status(200).send(card)
+      } else {
+        res.status(200).send(card)
+      }
+    })
     .catch((err) => res.status(400).send({ message: err.message }));
 };

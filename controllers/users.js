@@ -2,7 +2,7 @@ const User = require("../models/user");
 
 module.exports.getUsers = (req, res) => {
   User.find({})
-    .then((users) => res.status(200).send({ data: users }))
+    .then((users) => res.status(200).send(users))
     .catch((err) =>
       res.status(500).send({ message: "Error al leer datos de usuarios" })
     );
@@ -11,7 +11,7 @@ module.exports.getUsers = (req, res) => {
 module.exports.getUserById = (req, res) => {
   User.findById(req.params.id)
     .orFail()
-    .then((user) => res.status(200).send({ data: user }))
+    .then((user) => res.status(200).send(user))
     .catch((err) =>
       res.status(404).send({ message: "ID de usuario no encontrado" })
     );
@@ -20,7 +20,7 @@ module.exports.getUserById = (req, res) => {
 module.exports.createUser = (req, res) => {
   const { name, about, avatar } = req.body;
   User.create({ name, about, avatar })
-    .then((user) => res.status(201).send({ data: user }))
+    .then((user) => res.status(201).send(user))
     .catch((err) => res.status(404).send({ message: err.message }));
 };
 
@@ -36,7 +36,7 @@ module.exports.setUserInfo = (req, res) => {
     }
   )
     .orFail()
-    .then((user) => res.status(200).send({ data: user }))
+    .then((user) => res.status(200).send(user))
     .catch((err) => res.status(400).send({ message: err.message }));
 };
 
@@ -52,6 +52,6 @@ module.exports.setUserAvatar = (req, res) => {
     }
   )
     .orFail()
-    .then((user) => res.status(200).send({ data: user }))
+    .then((user) => res.status(200).send(user))
     .catch((err) => res.status(400).send({ message: err.message }));
 };
